@@ -205,7 +205,7 @@ section.conteiner .List::before {
         top: auto;
         left: auto;
         transform: none;
-        margin-top: -100px; /* PUXA APENAS O CARRO PARA CIMA */
+        margin-top: -40px; /* PUXA APENAS O CARRO PARA CIMA */
     }
 
     .Item.active .car-img img {
@@ -252,6 +252,10 @@ section.conteiner .List::before {
         transform: translateX(-50%);
         width: 200px;
         justify-content: space-between;
+    }
+
+    section.conteiner .List::before {
+        display: none;
     }
 }
 
