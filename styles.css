@@ -1,3 +1,6 @@
+/* ==================
+    CONFIGURAÇÕES GLOBAIS
+   ================== */
 * {
     margin: 0;
     padding: 0;
@@ -13,97 +16,69 @@ body {
     overflow-x: hidden;
 }
 
-header {
+/* ==================
+    CURSOR PERSONALIZADO (APENAS DESKTOP)
+   ================== */
+.cursor {
+    width: 25px;
+    height: 25px;
+    border: 2px solid #fff;
+    border-radius: 50%;
     position: fixed;
-    width: 100%;
-    max-width: 1440px;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 0 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 10;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.2s, width 0.3s, height 0.3s, background-color 0.3s;
+    display: none; 
 }
 
-header img {
-    width: 200px;
+.cursor.grow {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(190, 255, 27, 0.3);
+    border-color: #beff1b;
 }
 
-header .desktop-nav ul {
-    display: flex;
-    gap: 30px;
-}
-
-header .desktop-nav li {
-    font-weight: 600;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-header .desktop-nav li:hover {
-    color: #beff1b;
-}
-
-.mobile-menu-icon {
-    display: none;
-    font-size: 28px;
-    color: #fff;
-    cursor: pointer;
-    z-index: 1001;
-}
-
-.mobile-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 80%;
-    max-width: 350px;
-    height: 100vh;
-    background-color: #0a0a0a;
-    z-index: 1000;
-    transition: right 0.4s ease-in-out;
-    display: flex;
-    flex-direction: column;
-}
-
-.mobile-menu.open {
-    right: 0;
-}
-
-.mobile-menu-close {
-    text-align: right;
-    padding: 25px;
-    font-size: 32px;
-    color: #fff;
-    cursor: pointer;
-}
-
-.mobile-menu nav ul {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    margin-top: 40px;
-}
-
-.mobile-menu nav li {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #fff;
+@media (min-width: 1024px) {
+    body {
+        
+    }
+    .cursor {
+        display: block;
+    }
 }
 
 
+/* ==================
+    HEADER E MENU
+   ================== */
+header { position: fixed; width: 100%; max-width: 1440px; top: 20px; left: 50%; transform: translateX(-50%); padding: 0 40px; display: flex; align-items: center; justify-content: space-between; z-index: 10; }
+header img { width: 200px; }
+header .desktop-nav ul { display: flex; gap: 30px; }
+header .desktop-nav li { font-weight: 600; cursor: pointer; transition: color 0.3s; }
+header .desktop-nav li:hover { color: #beff1b; }
+.mobile-menu-icon { display: none; font-size: 28px; color: #fff; cursor: pointer; z-index: 1001; }
+.mobile-menu { position: fixed; top: 0; right: -100%; width: 80%; max-width: 350px; height: 100vh; background-color: #0a0a0a; z-index: 1000; transition: right 0.4s ease-in-out; display: flex; flex-direction: column; }
+.mobile-menu.open { right: 0; }
+.mobile-menu-close { text-align: right; padding: 25px; font-size: 32px; color: #fff; cursor: pointer; }
+.mobile-menu nav ul { display: flex; flex-direction: column; align-items: center; gap: 30px; margin-top: 40px; }
+.mobile-menu nav li { font-size: 1.5rem; font-weight: 600; color: #fff; }
+
+
+/* ==================
+    CARROSSEL - LAYOUT RESTAURADO
+   ================== */
 section.conteiner {
-    background-image: radial-gradient(#7f3d9e, #6d00d9);
     height: 100vh;
     position: relative;
+    background-image: radial-gradient(#7f3d9e, #6d00d9);
+    transition: background-image 1s ease-in-out;
     overflow: hidden;
+    perspective: 1500px;
 }
 
 section.conteiner .List {
-    width: 70vw;
+    width: 80vw; /* Aumenta a área útil para centralizar melhor */
     height: 100%;
     margin: auto;
     position: relative;
@@ -135,9 +110,10 @@ section.conteiner .List::before {
 .Item .car-img {
     position: absolute;
     top: 50%;
-    left: 55%;
+    left: 50%; /* Posição ajustada */
     transform: translateY(-50%);
-    width: 70%;
+    width: 75%; /* Largura ajustada */
+    transition: transform 0.1s linear;
 }
 
 .Item .car-img img {
@@ -155,7 +131,7 @@ section.conteiner .List::before {
     position: absolute;
     top: 0;
     left: 0;
-    width: 45%;
+    width: 50%; /* Largura ajustada */
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -163,174 +139,73 @@ section.conteiner .List::before {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.content .car-information, .content h2, .content .description, .content .information {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: text-reveal 0.8s forwards;
-}
-
+/* O resto do CSS de conteúdo e controles continua o mesmo */
+.content .car-information, .content h2, .content .description, .content .information { opacity: 0; transform: translateY(20px); animation: text-reveal 0.8s forwards; }
 .Item.active .content .car-information { animation-delay: 0.6s; }
 .Item.active .content h2 { animation-delay: 0.8s; }
 .Item.active .content .description { animation-delay: 1.0s; }
 .Item.active .content .information { animation-delay: 1.2s; }
+.content .car-information { font-weight: bold; }
+.content h2 { font-size: 7em; line-height: 1; font-family: "League Gothic", sans-serif; }
+.content .description { color: #d9d9d9; font-size: 1rem; line-height: 1.6; margin: 20px 0; }
+.content .information { width: 160px; height: 45px; border-radius: 30px; text-transform: uppercase; border: none; background-color: #beff1b; color: #000; font-weight: bold; font-size: 1rem; transition: transform 0.3s; cursor: pointer; }
+.content .information:hover { transform: scale(1.05); }
 
-.content .car-information {
-    font-weight: bold;
-}
+.arrows { position: absolute; bottom: 40px; right: 5vw; display: flex; gap: 20px; z-index: 1; }
+.arrows button { width: 50px; height: 50px; border-radius: 50%; border: none; background-color: rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px); cursor: pointer; display: flex; justify-content: center; align-items: center; transition: background-color 0.3s; }
+.arrows button:hover { background-color: #beff1b; }
+.arrows button img { width: 20px; }
+#prev img { transform: scaleX(-1); }
 
-.content h2 {
-    font-size: 7em;
-    line-height: 1;
-    font-family: "League Gothic", sans-serif;
-}
+.indicators { position: absolute; bottom: 40px; left: 5vw; display: flex; align-items: center; gap: 15px; }
+.indicators .number { font-size: 4em; font-family: "League Gothic", sans-serif; }
+.indicators ul { display: flex; gap: 10px; }
+.indicators ul li { width: 50px; height: 5px; background-color: rgba(255, 255, 255, 0.5); border-radius: 5px; transition: background-color 0.5s; cursor: pointer; }
+.indicators ul li.active { background-color: #fff; }
 
-.content .description {
-    color: #d9d9d9;
-    font-size: 1rem;
-    line-height: 1.6;
-    margin: 20px 0;
-}
-
-.content .information {
-    width: 160px;
-    height: 45px;
-    border-radius: 30px;
-    text-transform: uppercase;
-    border: none;
-    background-color: #beff1b;
-    color: #000;
-    font-weight: bold;
-    font-size: 1rem;
-    transition: transform 0.3s;
-    cursor: pointer;
-}
-
-.content .information:hover {
-    transform: scale(1.05);
-}
-
-.arrows {
-    position: absolute;
-    bottom: 40px;
-    right: 5vw;
-    display: flex;
-    gap: 20px;
-    z-index: 1;
-}
-
-.arrows button {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: none;
-    background-color: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(5px);
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s;
-}
-
-.arrows button:hover {
-    background-color: #beff1b;
-}
-
-.arrows button img {
-    width: 20px;
-}
-
-#prev img {
-    transform: scaleX(-1);
-}
-
-.indicators {
-    position: absolute;
-    bottom: 40px;
-    left: 5vw;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.indicators .number {
-    font-size: 4em;
-    font-family: "League Gothic", sans-serif;
-}
-
-.indicators ul {
-    display: flex;
-    gap: 10px;
-}
-
-.indicators ul li {
-    width: 50px;
-    height: 5px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 5px;
-    transition: background-color 0.5s;
-    cursor: pointer;
-}
-
-.indicators ul li.active {
-    background-color: #fff;
-}
-
-@keyframes text-reveal {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
+@keyframes text-reveal { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ==================
     RESPONSIVIDADE
    ================== */
-
 @media (max-width: 1024px) {
+    header .desktop-nav { display: none; }
+    header .mobile-menu-icon { display: block; }
+}
+
+/* Responsividade para Tablets e Celulares Maiores */
+/* Responsividade para Tablets e Celulares Maiores */
+/* Responsividade para Tablets e Celulares Maiores */
+/* Responsividade para Tablets e Celulares Maiores */
+@media (max-width: 768px) {
+    header {
+        padding: 0 20px;
+    }
     header .desktop-nav {
         display: none;
     }
     header .mobile-menu-icon {
         display: block;
     }
-    .content h2 {
-        font-size: 5em;
-    }
-    .Item .car-img {
-        width: 80%;
-        left: 50%;
-    }
-    .content {
-        width: 50%;
-    }
-}
 
-@media (max-width: 768px) {
-    header {
-        padding: 0 20px;
-    }
+    /* --- CORREÇÃO FINAL DE POSICIONAMENTO --- */
 
-    .Item {
+    section.conteiner .List .Item {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: center; /* VOLTAMOS A CENTRALIZAR O BLOCO TODO */
         align-items: center;
-        padding-top: 80px;
+        padding-top: 0; /* Removemos o padding desnecessário */
     }
     
     .Item .car-img {
         position: relative;
-        width: 90%;
+        width: 95%;
         order: 1;
         top: auto;
         left: auto;
         transform: none;
+        margin-top: -100px; /* PUXA APENAS O CARRO PARA CIMA */
     }
 
     .Item.active .car-img img {
@@ -340,17 +215,28 @@ section.conteiner .List::before {
     .content {
         position: relative;
         width: 90%;
-        height: 50%;
-        top: auto;
+        height: auto;
         left: auto;
+        top: auto;
+        transform: none;
         align-items: center;
         text-align: center;
         order: 2;
-        margin-top: -50px;
+        margin-top: -40px; /* Ajusta a posição do texto em relação ao carro */
     }
-
+    
     .content h2 {
-        font-size: 4em;
+        font-size: 3.8em;
+    }
+    .content .description {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin: 15px 0;
+    }
+    .content .information {
+        height: 40px;
+        width: 140px;
+        font-size: 0.9rem;
     }
 
     .indicators {
@@ -359,6 +245,7 @@ section.conteiner .List::before {
         transform: translateX(-50%);
         width: auto;
     }
+
     .arrows {
         bottom: 80px;
         left: 50%;
@@ -369,23 +256,10 @@ section.conteiner .List::before {
 }
 
 @media (max-width: 480px) {
-    header img {
-        width: 150px;
-    }
-    .content h2 {
-        font-size: 3.2em;
-    }
-    .indicators .number {
-        font-size: 3em;
-    }
-    .indicators ul li {
-        width: 60px;
-    }
-    .arrows {
-        bottom: 80px;
-    }
-    .arrows button {
-        width: 45px;
-        height: 45px;
-    }
+    header img { width: 150px; }
+    .content h2 { font-size: 3em; }
+    .indicators .number { font-size: 3em; }
+    .indicators ul li { width: 40px; }
+    .arrows { bottom: 80px; }
+    .arrows button { width: 45px; height: 45px; }
 }
