@@ -1,22 +1,28 @@
-
+/* ==================
+    CONFIGURAÇÕES GLOBAIS
+   ================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     list-style: none;
     font-family: "Poppins", sans-serif;
-   
-    cursor: none;
 }
 
 body {
     background-color: #000;
     color: #fff;
     font-size: 16px;
-    overflow: hidden;
+    overflow-x: hidden; /* Permite rolagem vertical mas previne a horizontal */
 }
 
+/* Esconde o cursor padrão em desktops */
 
+
+
+/* ==================
+    CURSOR PERSONALIZADO
+   ================== */
 .cursor {
     width: 20px;
     height: 20px;
@@ -24,9 +30,16 @@ body {
     border-radius: 50%;
     position: fixed;
     transform: translate(-50%, -50%);
-    pointer-events: none; /* Permite clicar através do cursor */
+    pointer-events: none;
     z-index: 9999;
     transition: transform 0.2s ease, width 0.2s ease, height 0.2s ease;
+    display: none; /* Escondido por padrão */
+}
+/* Mostra o cursor apenas em telas grandes */
+@media (min-width: 1024px) {
+    .cursor {
+        display: block;
+    }
 }
 .cursor.cursor-grow {
     width: 40px;
@@ -35,12 +48,17 @@ body {
 }
 
 
+/* ==================
+    HEADER
+   ================== */
 header {
     position: fixed;
-    width: 90vw;
+    width: 100%;
+    max-width: 1440px; /* Limita a largura em telas muito grandes */
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
+    padding: 0 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -52,36 +70,97 @@ header img {
     width: 200px;
 }
 
-header nav ul {
+header .desktop-nav ul {
     display: flex;
     gap: 30px;
 }
 
-header nav li {
+header .desktop-nav li {
     font-weight: 600;
+    cursor: pointer;
     transition: color 0.3s;
 }
 
-header nav li:hover {
+header .desktop-nav li:hover {
     color: #beff1b;
 }
 
+/* ==================
+    MENU MOBILE
+   ================== */
+.mobile-menu-icon {
+    display: none; /* Começa escondido */
+    font-size: 28px;
+    color: #fff;
+    cursor: pointer;
+}
 
+/* Animação de Toque para o Ícone de Menu Mobile */
+.mobile-menu-icon i {
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+.mobile-menu-icon i:active {
+    transform: scale(0.85);
+    opacity: 0.7;
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Começa fora da tela */
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background-color: #0a0a0a;
+    z-index: 1000;
+    transition: right 0.4s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+.mobile-menu.open {
+    right: 0; /* Entra na tela */
+}
+
+.mobile-menu-close {
+    text-align: right;
+    padding: 20px;
+    font-size: 32px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.mobile-menu nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+.mobile-menu nav li {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+
+/* ==================
+    CARROSSEL E FUNDO
+   ================== */
 section.conteiner {
     height: 100vh;
     position: relative;
     background-image: radial-gradient(#7f3d9e, #6d00d9);
     transition: background-image 1s ease-in-out;
-    
     perspective: 1000px;
 }
 
+/* ... O resto do seu CSS do carrossel continua aqui ... */
 section.conteiner .List {
     width: 80vw;
     height: 100%;
     margin: auto;
     position: relative;
-    
     transform-style: preserve-3d;
 }
 
@@ -101,12 +180,9 @@ section.conteiner .List::before {
     top: 50%;
     left: 50%;
     width: 75%;
-    
     transition: transform 0.2s ease-out;
     transform: translate(-40%, -50%);
 }
-
-
 
 .Item {
     position: absolute;
@@ -268,40 +344,126 @@ section.conteiner .List::before {
     }
 }
 
-@media (max-width: 768px) {
-    .cursor { display: none; } 
-    body { cursor: auto; } 
 
-    header {
-        width: 95vw;
-        grid-template-columns: 1fr;
-        justify-items: center;
-    }
-    header nav {
+/* ==================
+    RESPONSIVIDADE
+   ================== */
+
+/* Tablet e Laptops Pequenos */
+@media (max-width: 1024px) {
+    header .desktop-nav {
         display: none;
     }
+    header .mobile-menu-icon {
+        display: block;
+    }
+    .content h2 {
+        font-size: 5em;
+    }
     .content {
-        width: 100%;
-        left: 0;
-        align-items: center;
-        text-align: center;
-        padding: 0 20px;
+        width: 50%;
     }
     .Item .car-img {
-        width: 95%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        width: 70%;
+        left: 45%;
     }
+}
+
+
+/* Celulares e Tablets */
+@media (max-width: 768px) {
+    header {
+        padding: 0 20px;
+    }
+    header .desktop-nav {
+        display: none;
+    }
+    header .mobile-menu-icon {
+        display: block;
+    }
+
+    /* --- AJUSTES APLICADOS AQUI --- */
+
+    .Item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 30px; /* Diminuído de 60px para levantar o carro */
+    }
+
+    .Item .car-img {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        width: 90%;
+        order: 1;
+    }
+
+    /* Inclinação restaurada no mobile */
+    .Item.active .car-img img {
+        transform: translateY(0) rotate(-20deg); 
+    }
+
+    .content {
+        position: relative;
+        width: 90%;
+        height: 44%;
+        top: auto;
+        left: auto;
+        transform: none;
+        align-items: center;
+        text-align: center;
+        padding: 0;
+        margin-top: -40px; /* Puxa o texto para mais perto do carro inclinado */
+        order: 2;
+    }
+
+    .content .description {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .content h2 {
+        font-size: 4.5em;
+    }
+
     .indicators {
+        bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
         width: auto;
-        justify-content: center;
     }
     .arrows {
-        bottom: 120px;
+        bottom: 80px;
         left: 50%;
         transform: translateX(-50%);
-        width: auto;
+        width: 200px;
+        justify-content: space-between;
+    }
+}
+
+/* Celulares Pequenos */
+@media (max-width: 480px) {
+    header img {
+        width: 150px;
+    }
+    .content h2 {
+        font-size: 3.5em;
+    }
+    .indicators .number {
+        font-size: 3em;
+    }
+    .indicators ul li {
+        width: 40px;
+    }
+    .arrows {
+        bottom: 100px;
+    }
+    .arrows button {
+        width: 40px;
+        height: 40px;
     }
 }
