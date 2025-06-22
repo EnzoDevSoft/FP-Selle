@@ -1,19 +1,16 @@
-// Seleciona todos os elementos necessários do HTML
 const prevButton = document.getElementById('prev');
 const nextButton = document.getElementById('next');
 const container = document.querySelector('.conteiner');
-const list = container.querySelector('.List'); // Não estava sendo usado, mas mantido caso precise
+const list = container.querySelector('.List'); 
 const items = container.querySelectorAll('.List .Item');
 const indicator = document.querySelector('.indicators');
 const dots = indicator.querySelectorAll('ul li');
 const number = indicator.querySelector('.number');
 
-// Variáveis para controlar o estado do slider
 let active = 0;
 const firstPosition = 0;
 const lastPosition = items.length - 1;
 
-// Array com as cores de fundo
 const backgroundColors = [
     'radial-gradient(#7f3d9e, #6d00d9)', 
     'radial-gradient(#3b3a3f, #000000)', 
@@ -60,27 +57,24 @@ if (menuIcon && closeIcon && mobileMenu) {
 }
 
 
-// --- LÓGICA OTIMIZADA PARA CURSOR E PARALLAX (APENAS DESKTOP) ---
 if (window.innerWidth > 1024) {
     const cursor = document.querySelector('.cursor');
     const interactiveElements = document.querySelectorAll('button, a, li');
 
-    // Variáveis para guardar a posição do mouse
     let mouseX = 0;
     let mouseY = 0;
 
-    // Listener apenas para atualizar as coordenadas
+  
     window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
     });
 
-    // Loop de animação otimizado
+
     function animate() {
-        // Animação do cursor
+        
         cursor.style.transform = `translate(${mouseX - (cursor.offsetWidth / 2)}px, ${mouseY - (cursor.offsetHeight / 2)}px)`;
         
-        // Animação do carro
         const carImg = document.querySelector('.Item.active .car-img');
         if (carImg) {
             const rect = container.getBoundingClientRect();
@@ -96,16 +90,16 @@ if (window.innerWidth > 1024) {
         requestAnimationFrame(animate);
     }
     
-    // Inicia o loop de animação
+ 
     requestAnimationFrame(animate);
 
-    // Efeito de "crescer" do cursor
+    
     interactiveElements.forEach(el => {
         el.addEventListener('mouseenter', () => cursor.classList.add('grow'));
         el.addEventListener('mouseleave', () => cursor.classList.remove('grow'));
     });
 
-    // Reset da posição do carro ao sair
+    
     container.addEventListener('mouseleave', () => {
         const carImg = document.querySelector('.Item.active .car-img');
         if (carImg) {

@@ -1,6 +1,3 @@
-/* ==================
-    CONFIGURAÇÕES GLOBAIS
-   ================== */
 * {
     margin: 0;
     padding: 0;
@@ -16,9 +13,7 @@ body {
     overflow-x: hidden;
 }
 
-/* ==================
-    CURSOR PERSONALIZADO (APENAS DESKTOP)
-   ================== */
+
 .cursor {
     width: 25px;
     height: 25px;
@@ -49,9 +44,7 @@ body {
 }
 
 
-/* ==================
-    HEADER E MENU
-   ================== */
+
 header { position: fixed; width: 100%; max-width: 1440px; top: 20px; left: 50%; transform: translateX(-50%); padding: 0 40px; display: flex; align-items: center; justify-content: space-between; z-index: 10; }
 header img { width: 200px; }
 header .desktop-nav ul { display: flex; gap: 30px; }
@@ -65,9 +58,7 @@ header .desktop-nav li:hover { color: #beff1b; }
 .mobile-menu nav li { font-size: 1.5rem; font-weight: 600; color: #fff; }
 
 
-/* ==================
-    CARROSSEL - LAYOUT RESTAURADO
-   ================== */
+
 section.conteiner {
     height: 100vh;
     position: relative;
@@ -78,7 +69,7 @@ section.conteiner {
 }
 
 section.conteiner .List {
-    width: 80vw; /* Aumenta a área útil para centralizar melhor */
+    width: 80vw; 
     height: 100%;
     margin: auto;
     position: relative;
@@ -110,9 +101,9 @@ section.conteiner .List::before {
 .Item .car-img {
     position: absolute;
     top: 50%;
-    left: 50%; /* Posição ajustada */
+    left: 50%; 
     transform: translateY(-50%);
-    width: 75%; /* Largura ajustada */
+    width: 75%;
     transition: transform 0.1s linear;
 }
 
@@ -131,7 +122,7 @@ section.conteiner .List::before {
     position: absolute;
     top: 0;
     left: 0;
-    width: 50%; /* Largura ajustada */
+    width: 50%; 
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -165,18 +156,13 @@ section.conteiner .List::before {
 
 @keyframes text-reveal { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-/* ==================
-    RESPONSIVIDADE
-   ================== */
 @media (max-width: 1024px) {
     header .desktop-nav { display: none; }
     header .mobile-menu-icon { display: block; }
 }
 
-/* Responsividade para Tablets e Celulares Maiores */
-/* Responsividade para Tablets e Celulares Maiores */
-/* Responsividade para Tablets e Celulares Maiores */
-/* Responsividade para Tablets e Celulares Maiores */
+
+
 @media (max-width: 768px) {
     header {
         padding: 0 20px;
@@ -188,14 +174,14 @@ section.conteiner .List::before {
         display: block;
     }
 
-    /* --- CORREÇÃO FINAL DE POSICIONAMENTO --- */
+    
 
     section.conteiner .List .Item {
         display: flex;
         flex-direction: column;
-        justify-content: center; /* VOLTAMOS A CENTRALIZAR O BLOCO TODO */
+        justify-content: center; 
         align-items: center;
-        padding-top: 0; /* Removemos o padding desnecessário */
+        padding-top: 0; 
     }
     
     .Item .car-img {
@@ -205,7 +191,7 @@ section.conteiner .List::before {
         top: auto;
         left: auto;
         transform: none;
-        margin-top: -40px; /* PUXA APENAS O CARRO PARA CIMA */
+        margin-top: -40px; 
     }
 
     .Item.active .car-img img {
@@ -222,7 +208,7 @@ section.conteiner .List::before {
         align-items: center;
         text-align: center;
         order: 2;
-        margin-top: -40px; /* Ajusta a posição do texto em relação ao carro */
+        margin-top: -40px; 
     }
     
     .content h2 {
