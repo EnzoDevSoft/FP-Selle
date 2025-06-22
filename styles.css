@@ -130,7 +130,7 @@ section.conteiner .List::before {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* O resto do CSS de conteúdo e controles continua o mesmo */
+
 .content .car-information, .content h2, .content .description, .content .information { opacity: 0; transform: translateY(20px); animation: text-reveal 0.8s forwards; }
 .Item.active .content .car-information { animation-delay: 0.6s; }
 .Item.active .content h2 { animation-delay: 0.8s; }

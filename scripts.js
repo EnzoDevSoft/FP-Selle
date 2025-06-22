@@ -41,7 +41,6 @@ prevButton.onclick = () => {
 
 setSlider();
 
-// LÓGICA DO MENU MOBILE
 const menuIcon = document.querySelector('.mobile-menu-icon');
 const closeIcon = document.querySelector('.mobile-menu-close');
 const mobileMenu = document.querySelector('.mobile-menu');
