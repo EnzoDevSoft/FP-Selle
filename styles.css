@@ -261,5 +261,5 @@ section.conteiner .List::before {
     .indicators .number { font-size: 3em; }
     .indicators ul li { width: 40px; }
     .arrows { bottom: 80px; }
-    .arrows button { width: 45px; height: 65px; }
+    .arrows button { width: 45px; height: 45px; }
 }
